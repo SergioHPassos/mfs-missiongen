@@ -1,0 +1,49 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = "file:./dev.db"
+}
+
+model Plane {
+  id      String  @id @default(cuid())
+  name    String
+  price   Int     @default(0)
+
+  Pilot   Pilot?  @relation(fields: [pilotId], references: [id])
+  pilotId String?
+}
+
+model Mission {
+  id                String  @id @default(cuid())
+  departingAirport  String
+  arrivingAirport   String
+  distance          Int     @default(0)
+  objective         String
+  type              String
+  objectiveQuantity String
+  reward            Int     @default(0)
+
+  Pilot             Pilot?  @relation(fields: [pilotId], references: [id])
+  pilotId           String?
+}
+
+model Pilot {
+  id             String    @id @default(cuid())
+  firstName      String
+  lastName       String
+  middleName     String?
+  age            Int       @default(0)
+  money          Int       @default(0)
+  totalDistance  Int       @default(0)
+  totalCargo     Int       @default(0)
+  totalPassenger Int       @default(0)
+  
+  missions       Mission[]
+  planes         Plane[]
+}

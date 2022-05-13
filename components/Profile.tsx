@@ -4,7 +4,7 @@ import type { Pilot } from '../interfaces/UtilityInterfaces'
 export default function Profile(props: Props) {
   return (
     <>
-      <p className="flex items-center justify-center pt-20 text-5xl font-light">
+      <p className="flex items-center justify-center pt-14 text-5xl font-light">
         Pilot
       </p>
       <div className="flex items-center justify-between space-y-2 pl-4 pr-8 pt-20">
@@ -29,8 +29,8 @@ export default function Profile(props: Props) {
                   <p>{`${pilot.totalDistance}`}</p>
                   <p>{`${pilot.totalCargo}`}</p>
                   <p>{`${pilot.totalPassenger}`}</p>
-                  <p>{`${pilot.totalPassenger}`}</p>
-                  <p>{`${pilot.totalPassenger}`}</p>
+                  <p>{`${pilot.missions.length}`}</p>
+                  <p>{`${pilot.planes.length}`}</p>
                 </div>
               </>
             )

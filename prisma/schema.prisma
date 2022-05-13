@@ -20,25 +20,13 @@ model Plane {
 }
 
 model Airport {
-  id                String   @id @default(cuid())
-  ident             String
-  type              String
-  name              String
-  latitude_deg      Float    @default(0.0)
-  longitude_deg     Float    @default(0.0)
-  elevation_ft      Int      @default(0)
-  continent         String
-  iso_country       String
-  iso_region        String
-  municipality      String
-  scheduled_service String
-  gps_code          String
-  iata_code         String
-  local_code        String
-  keywords          String
-  
-  Mission           Mission? @relation(fields: [missionId], references: [id])
-  missionId         String?
+  id            String @id @default(cuid())
+  ident         String
+  latitude_deg  Float  @default(0.0)
+  longitude_deg Float  @default(0.0)
+
+  Mission   Mission? @relation(fields: [missionId], references: [id])
+  missionId String?
 }
 
 model Mission {

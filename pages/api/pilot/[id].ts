@@ -1,17 +1,6 @@
 import type { NextApiRequest, NextApiResponse } from 'next'
 import { prisma } from '../../../prisma/prismaInstance'
-
-interface Pilot {
-  id: string
-  firstName: string
-  lastName: string
-  middleName: string
-  age: number
-  money: number
-  totalDistance: number
-  totalCargo: number
-  totalPassenger: number
-}
+import type { Pilot } from '../../../interfaces/UtilityInterfaces'
 
 export default async function (req: NextApiRequest, res: NextApiResponse) {
   if (req.method === 'GET') {
@@ -21,6 +10,10 @@ export default async function (req: NextApiRequest, res: NextApiResponse) {
     const pilot: Pilot[] = await prisma.pilot.findMany({
       where: {
         id: _id,
+      },
+      include: {
+        missions: true,
+        planes: true,
       },
     })
     res.status(200).json(pilot)

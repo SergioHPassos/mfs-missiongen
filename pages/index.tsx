@@ -7,6 +7,9 @@ import Image from 'next/image'
 import ListMission from '../components/ListMission'
 import Profile from '../components/Profile'
 
+// interfaces
+import type { Pilot } from '../interfaces/UtilityInterfaces'
+
 const Home: NextPage = () => {
   const [pilot, setPilot] = useState<Pilot[]>(null)
 
@@ -29,16 +32,4 @@ const getPilot = async (setPilot: Function) => {
   await fetch(`/api/pilot/${id}`)
     .then((res) => res.json())
     .then((pilots) => setPilot(pilots))
-}
-
-interface Pilot {
-  id: string
-  firstName: string
-  lastName: string
-  middleName: string
-  age: number
-  money: number
-  totalDistance: number
-  totalCargo: number
-  totalPassenger: number
 }

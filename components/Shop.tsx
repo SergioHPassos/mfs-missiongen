@@ -1,7 +1,6 @@
-import { randomUUID } from 'crypto'
-import { InferGetStaticPropsType } from 'next'
 import React from 'react'
 import { v4 as uuidv4 } from 'uuid'
+import { Plane } from '../interfaces/UtilityInterfaces'
 
 export default function Shop(props: Props) {
   return (
@@ -44,9 +43,4 @@ export default function Shop(props: Props) {
 
 interface Props {
   planes?: Plane[]
-}
-
-interface Plane {
-  aircraft: string
-  cost: string
 }

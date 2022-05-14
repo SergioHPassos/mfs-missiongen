@@ -2,30 +2,6 @@
 import type { NextApiRequest, NextApiResponse } from 'next'
 import { prisma } from '../../prisma/prismaInstance'
 
-interface Airport {
-  id?: string
-  ident?: string
-  latitude_deg?: number
-  longitude_deg?: number
-  distance?: number
-}
-
-interface Mission {
-  departingAirport?: string
-  arrivingAirport?: string
-  distance?: number
-  objective?: string
-  type?: string
-  objectiveQuantity?: number
-  reward?: number
-  airports?: Airport[]
-}
-
-interface Quantity {
-  deliver: number[]
-  dropOff: number[]
-}
-
 const objectives: string[] = ['of cargo', 'passengers']
 const types: string[] = ['deliver', 'drop off']
 const objectiveQuantity: Quantity = {
@@ -39,7 +15,7 @@ export default async function handler(
 ) {
   if (req.method == 'GET') {
     const airports: Airport[] = await prisma.airport.findMany({
-      take: 300,
+      take: 100,
       select: {
         id: true,
         ident: true,
@@ -98,7 +74,7 @@ async function GenerateMission(
         }
         departing.distance = dis
 
-        const arriving: Airport = airports.at(i) || {
+        const arriving: Airport = airports.at(j) || {
           id: '',
           ident: '',
           latitude_deg: 0.0,
@@ -154,10 +130,34 @@ async function GenerateMission(
       type: _type,
       objectiveQuantity: _quantity,
       reward: _reward,
-      airports: [_departing, _arriving],
+      // airports: [_departing, _arriving],
     }
     missions.push(mission)
   }
 
   return missions
+}
+
+interface Airport {
+  id?: string
+  ident?: string
+  latitude_deg?: number
+  longitude_deg?: number
+  distance?: number
+}
+
+interface Mission {
+  departingAirport?: string
+  arrivingAirport?: string
+  distance?: number
+  objective?: string
+  type?: string
+  objectiveQuantity?: number
+  reward?: number
+  airports?: Airport[]
+}
+
+interface Quantity {
+  deliver: number[]
+  dropOff: number[]
 }

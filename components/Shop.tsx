@@ -31,9 +31,9 @@ export default function Shop(props: Props) {
             )
           })}
 
-        {/* but plane button */}
-        <div className="flex justify-center">
-          <button className="w-14 rounded-sm bg-zinc-200 text-center">
+        {/* buy plane button */}
+        <div className="flex justify-center p-4 text-center">
+          <button className="h-10 w-24 rounded-sm bg-yellow-500 text-xl text-yellow-100">
             Buy
           </button>
         </div>

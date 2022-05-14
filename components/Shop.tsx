@@ -1,6 +1,6 @@
 import React from 'react'
-import { v4 as uuidv4 } from 'uuid'
-import { Plane } from '../interfaces/UtilityInterfaces'
+import { Pilot, Plane } from '../interfaces/UtilityInterfaces'
+import ShopList from './ShopList'
 
 export default function Shop(props: Props) {
   return (
@@ -11,27 +11,20 @@ export default function Shop(props: Props) {
       </p>
 
       {/* list planes */}
-      <div className="flex flex-col space-y-8 pt-24">
+      <div className="flex flex-col pt-14">
         {/* render list planes */}
         {props.planes &&
           props.planes.map((plane) => {
             return (
-              <div className="flex justify-between pl-2 pr-8" key={uuidv4()}>
-                {/* aircraft name */}
-                <div className="flex flex-col">
-                  <p>{plane.aircraft}</p>
-                </div>
-
-                {/* cost */}
-                <div className="flex flex-col">
-                  <p>{plane.cost}</p>
-                </div>
-              </div>
+              <>
+                {/* aircraft name and cost */}
+                <ShopList plane={plane} />
+              </>
             )
           })}
 
         {/* buy plane button */}
-        <div className="flex justify-center p-4 text-center">
+        <div className="flex justify-center pt-8 text-center">
           <button className="h-10 w-24 rounded-sm bg-yellow-500 text-xl text-yellow-100">
             Buy
           </button>
@@ -43,4 +36,5 @@ export default function Shop(props: Props) {
 
 interface Props {
   planes?: Plane[]
+  pilots?: Pilot[]
 }

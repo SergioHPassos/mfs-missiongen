@@ -42,5 +42,4 @@ export default function Profile(props: Props) {
 
 interface Props {
   pilots?: Pilot[]
-  setPilot?: Function
 }

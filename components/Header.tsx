@@ -59,7 +59,7 @@ export default function Header() {
             className="py-[0.35rem] text-lg font-medium"
             onClick={toggleIsDropped}
           >
-            Missions
+            <a href="">Missions</a>
           </p>
         </Link>
 
@@ -68,7 +68,7 @@ export default function Header() {
             className="py-[0.35rem] text-lg font-medium"
             onClick={toggleIsDropped}
           >
-            Active Flight
+            <a href="">Active Flight</a>
           </p>
         </Link>
 
@@ -77,7 +77,7 @@ export default function Header() {
             className="py-[0.35rem] text-lg font-medium"
             onClick={toggleIsDropped}
           >
-            Pilot
+            <a href="">Pilot</a>
           </p>
         </Link>
 
@@ -86,7 +86,7 @@ export default function Header() {
             className="py-[0.35rem] text-lg font-medium"
             onClick={toggleIsDropped}
           >
-            Shop
+            <a href="">Shop</a>
           </p>
         </Link>
       </div>

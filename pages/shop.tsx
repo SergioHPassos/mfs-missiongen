@@ -40,4 +40,6 @@ export async function getServerSideProps() {
   }
 }
 
-const patchPilot = async (accountBalance: number) => {}
+const patchPilot = async (accountBalance: number) => {
+  const res = await fetch('/api/')
+}

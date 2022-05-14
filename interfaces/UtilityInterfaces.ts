@@ -1,4 +1,7 @@
-export interface Plane {}
+export interface Plane {
+  aircraft: string
+  cost: string
+}
 
 export interface Mission {}
 

@@ -1,7 +1,12 @@
 import { useState, useEffect, useRef } from 'react'
+import Link from 'next/link'
+
+// dependencies
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faBars } from '@fortawesome/free-solid-svg-icons'
-import Link from 'next/link'
+
+// interfaces
+import { Pilot } from '../interfaces/UtilityInterfaces'
 
 export default function Header() {
   const [isDropped, setIsDropped] = useState<boolean>(false)
@@ -49,7 +54,10 @@ export default function Header() {
           <FontAwesomeIcon icon={faBars} style={{ fontSize: 25 }} />
         </div>
 
-        {/* company name */}
+        {/* account balance */}
+        <div className="pr-3">
+          <p>{`Account Balance: $${12000}`}</p>
+        </div>
       </div>
 
       {/* links */}
@@ -92,4 +100,8 @@ export default function Header() {
       </div>
     </div>
   )
+}
+
+interface Props {
+  pilots: Pilot[]
 }

@@ -1,26 +1,21 @@
-export interface Plane {
-  aircraft: string
-  cost: string
-}
-
 export interface Mission {}
 
 export interface Pilot {
-  id: string
-  firstName: string
-  lastName: string
-  middleName: string
-  age: number
-  money: number
-  totalDistance: number
-  totalCargo: number
-  totalPassenger: number
+  id?: string
+  firstName?: string
+  lastName?: string
+  middleName?: string
+  age?: number
+  money?: number
+  totalDistance?: number
+  totalCargo?: number
+  totalPassenger?: number
 
-  planes: Plane[]
-  missions: Mission[]
+  planes?: Plane[]
+  missions?: Mission[]
 }
 
 export interface Plane {
-  aircraft: string
-  cost: string
+  aircraft?: string
+  cost?: number
 }

@@ -1,6 +1,7 @@
 import type { NextApiRequest, NextApiResponse } from 'next'
 import { prisma } from '../../../prisma/prismaInstance'
-import type { Pilot } from '../../../interfaces/UtilityInterfaces'
+import type { Pilot } from '@prisma/client'
+// import type { Pilot } from '../../../interfaces/UtilityInterfaces'
 
 export default async function (req: NextApiRequest, res: NextApiResponse) {
   if (req.method === 'GET') {
@@ -17,5 +18,19 @@ export default async function (req: NextApiRequest, res: NextApiResponse) {
       },
     })
     res.status(200).json(pilot)
+  } else if (req.method === 'PATCH') {
+    const { id } = req.query
+    const { money } = req.body
+
+    await prisma.pilot.update({
+      where: {
+        id: id.toString(),
+      },
+      data: {
+        money: money,
+      },
+    })
+
+    res.json({ status: 'success' })
   }
 }

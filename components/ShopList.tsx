@@ -12,8 +12,14 @@ export default function ShopList(props: Props) {
   const toggleBgColor = () => {
     if (bgColor === 'bg-white') {
       setBgColor('bg-yellow-200')
+      props.setTotalShoppingCartCost(
+        props.totalShoppingCartCost + props.plane.cost
+      )
     } else {
       setBgColor('bg-white')
+      props.setTotalShoppingCartCost(
+        props.totalShoppingCartCost - props.plane.cost
+      )
     }
   }
 
@@ -32,7 +38,7 @@ export default function ShopList(props: Props) {
 
       {/* cost */}
       <div className="flex flex-col">
-        <p>{props.plane.cost}</p>
+        <p>{moneyString(props.plane.cost)}</p>
       </div>
     </div>
   )
@@ -40,4 +46,38 @@ export default function ShopList(props: Props) {
 
 interface Props {
   plane: Plane
+  totalShoppingCartCost: number
+  setTotalShoppingCartCost: Function
+}
+
+const moneyString = (cost: number) => {
+  const costString: string = cost.toString()
+  const costShortHand: string = costString.substring(0, 3)
+
+  switch (costString.length) {
+    case 4:
+      // $x.xxK
+      return `$${costShortHand[0]}.${costShortHand.substring(1)}K`
+      break
+    case 5:
+      // $xx.xK
+      return `$${costShortHand.substring(0, 2)}.${costShortHand[2]}K`
+      break
+    case 6:
+      // $xxxK
+      return `$${costShortHand}K`
+      break
+    case 7:
+      // $x.xxM
+      return `$${costShortHand[0]}.${costShortHand.substring(1)}M`
+      break
+    case 8:
+      // $xx.xM
+      return `$${costShortHand.substring(0, 2)}.${costShortHand[2]}M`
+      break
+    case 9:
+      // $xxxM
+      return `$${costShortHand}M`
+      break
+  }
 }

@@ -34,8 +34,8 @@ export default function Header() {
     <div
       className={
         isDropped
-          ? 'absolute flex h-[15rem] w-full flex-col items-start bg-black text-white opacity-90 transition-all'
-          : 'absolute flex h-12 w-full flex-col justify-center bg-black text-white'
+          ? 'absolute flex h-[15rem] w-full flex-col items-start bg-zinc-800 text-white opacity-90 transition-all'
+          : 'absolute flex h-12 w-full flex-col justify-center bg-zinc-800 text-white'
       }
       ref={dropdown}
     >
@@ -59,7 +59,7 @@ export default function Header() {
             className="py-[0.35rem] text-lg font-medium"
             onClick={toggleIsDropped}
           >
-            Home
+            Missions
           </p>
         </Link>
 
@@ -68,7 +68,7 @@ export default function Header() {
             className="py-[0.35rem] text-lg font-medium"
             onClick={toggleIsDropped}
           >
-            Profile
+            Active Flight
           </p>
         </Link>
 
@@ -77,11 +77,18 @@ export default function Header() {
             className="py-[0.35rem] text-lg font-medium"
             onClick={toggleIsDropped}
           >
-            New Challenge
+            Pilot
           </p>
         </Link>
 
-        <p className="py-[0.35rem] text-lg font-medium">Search</p>
+        <Link href="" passHref={true}>
+          <p
+            className="py-[0.35rem] text-lg font-medium"
+            onClick={toggleIsDropped}
+          >
+            Shop
+          </p>
+        </Link>
       </div>
     </div>
   )

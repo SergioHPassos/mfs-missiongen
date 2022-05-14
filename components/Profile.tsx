@@ -4,15 +4,13 @@ import type { Pilot } from '../interfaces/UtilityInterfaces'
 export default function Profile(props: Props) {
   return (
     <>
-      <p className="flex items-center justify-center pt-24 text-5xl font-light">
-        Pilot
-      </p>
-      <div className="flex items-center justify-between pl-4 pr-8 pt-14">
+      <p className="flex items-center justify-center pt-24 text-5xl">Pilot</p>
+      <div className="flex items-center justify-between px-3 pt-14">
         {props.pilots &&
           props.pilots.map((pilot) => {
             return (
               <>
-                <div className="flex flex-col space-y-4 font-semibold">
+                <div className="flex flex-col space-y-4">
                   <p>Pilot:</p>
                   <p>Age:</p>
                   <p>Money:</p>
@@ -22,7 +20,7 @@ export default function Profile(props: Props) {
                   <p>Missions Completed:</p>
                   <p>Planes Owned:</p>
                 </div>
-                <div className="flex flex-col space-y-4 font-semibold">
+                <div className="flex flex-col space-y-4">
                   <p>{`${pilot.firstName} ${pilot.middleName[0]}. ${pilot.lastName}`}</p>
                   <p>{`${pilot.age}`}</p>
                   <p>{`$${pilot.money}`}</p>

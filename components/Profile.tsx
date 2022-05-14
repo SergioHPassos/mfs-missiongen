@@ -4,10 +4,10 @@ import type { Pilot } from '../interfaces/UtilityInterfaces'
 export default function Profile(props: Props) {
   return (
     <>
-      <p className="flex items-center justify-center pt-14 text-5xl font-light">
+      <p className="flex items-center justify-center pt-24 text-5xl font-light">
         Pilot
       </p>
-      <div className="flex items-center justify-between space-y-2 pl-4 pr-8 pt-20">
+      <div className="flex items-center justify-between pl-4 pr-8 pt-14">
         {props.pilots &&
           props.pilots.map((pilot) => {
             return (

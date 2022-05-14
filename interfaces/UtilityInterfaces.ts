@@ -16,3 +16,8 @@ export interface Pilot {
   planes: Plane[]
   missions: Mission[]
 }
+
+export interface Plane {
+  aircraft: string
+  cost: string
+}

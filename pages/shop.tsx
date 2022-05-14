@@ -1,9 +1,12 @@
+import type { InferGetServerSidePropsType } from 'next'
 import React from 'react'
 
 //components
 import Shop from '../components/Shop'
 
-export default function shop() {
+export default function shop({
+  pilots,
+}: InferGetServerSidePropsType<typeof getServerSideProps>) {
   return (
     <>
       <Shop
@@ -17,4 +20,13 @@ export default function shop() {
       />
     </>
   )
+}
+
+export async function getServerSideProps() {
+  const id: string = 'cl347rys00013ysutsmhnpzlr'
+  const res = await fetch(`http:localhost:3000/api/pilot/${id}`)
+  const pilots = await res.json()
+  return {
+    props: { pilots }, // will be passed to the page component as props
+  }
 }

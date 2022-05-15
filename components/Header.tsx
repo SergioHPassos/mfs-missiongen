@@ -55,9 +55,9 @@ export default function Header() {
         </div>
 
         {/* account balance */}
-        <div className="pr-3">
+        {/* <div className="pr-3">
           <p>{`Account Balance: $${12000}`}</p>
-        </div>
+        </div> */}
       </div>
 
       {/* links */}

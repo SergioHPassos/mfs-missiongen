@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import type { InferGetServerSidePropsType, NextPage } from 'next'
+import type { InferGetStaticPropsType, NextPage } from 'next'
 
 // components
 import Profile from '../components/Profile'
@@ -7,9 +7,7 @@ import Profile from '../components/Profile'
 // interfaces
 import type { Pilot } from '../interfaces/UtilityInterfaces'
 
-const pilot = ({
-  pilots,
-}: InferGetServerSidePropsType<typeof getServerSideProps>) => {
+const pilot = ({ pilots }: InferGetStaticPropsType<typeof getStaticProps>) => {
   return (
     <div className="">
       <Profile pilots={pilots} />
@@ -17,7 +15,7 @@ const pilot = ({
   )
 }
 
-export async function getServerSideProps() {
+export async function getStaticProps() {
   const id: string = 'cl347rys00013ysutsmhnpzlr'
   const res = await fetch(`http:localhost:3000/api/pilot/${id}`)
   const pilots = await res.json()

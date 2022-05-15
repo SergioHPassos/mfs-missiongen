@@ -1,6 +1,14 @@
 import React, { useState } from 'react'
+
+// interfaces
 import { Pilot, Plane } from '../interfaces/UtilityInterfaces'
+
+// components
 import ShopList from './ShopList'
+import Title from './Title'
+
+// dependencies
+import { v4 as uuidv4 } from 'uuid'
 
 export default function Shop(props: Props) {
   const [totalShoppingCartCost, setTotalShoppingCartCost] = useState<number>(0)
@@ -8,9 +16,7 @@ export default function Shop(props: Props) {
   return (
     <>
       {/* title */}
-      <p className="flex items-center justify-center pt-24 text-5xl font-light">
-        Shop
-      </p>
+      <Title title="Shop" key={uuidv4()} />
 
       {/* list planes */}
       <div className="flex flex-col pt-14">

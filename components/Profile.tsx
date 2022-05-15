@@ -1,10 +1,15 @@
 import React from 'react'
+
+// interfaces
 import type { Pilot } from '../interfaces/UtilityInterfaces'
+
+// components
+import Title from './Title'
 
 export default function Profile(props: Props) {
   return (
     <>
-      <p className="flex items-center justify-center pt-24 text-5xl">Pilot</p>
+      <Title title="Pilot" />
       <div className="flex items-center justify-between px-3 pt-14">
         {props.pilots &&
           props.pilots.map((pilot) => {

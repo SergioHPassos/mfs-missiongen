@@ -76,7 +76,7 @@ export default function Header() {
           </p>
         </Link>
 
-        <Link href="" passHref={true}>
+        <Link href="/activeflight" passHref={true}>
           <p
             className="py-[0.35rem] text-lg font-medium"
             onClick={toggleIsDropped}

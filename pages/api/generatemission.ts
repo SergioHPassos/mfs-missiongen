@@ -3,7 +3,7 @@ import type { NextApiRequest, NextApiResponse } from 'next'
 import { prisma } from '../../prisma/prismaInstance'
 
 const objectives: string[] = ['of cargo', 'passengers']
-const types: string[] = ['deliver', 'drop off']
+const types: string[] = ['Deliver', 'Drop off']
 const objectiveQuantity: Quantity = {
   deliver: new Array(50).fill(0).map((e) => (Math.random() * 150) | 0),
   dropOff: new Array(50).fill(0).map((e) => Math.floor(Math.random() * 20) | 0),

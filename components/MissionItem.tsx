@@ -38,7 +38,7 @@ export default function MissionItem(props: Props) {
               }`}</p>
             </div>
 
-            {/* transit data */}
+            {/* transit/ data */}
             <div className="flex flex-row items-center space-x-2">
               <p>{props.mission.departingAirport}</p>
               <FontAwesomeIcon icon={faArrowRight} />
@@ -48,9 +48,18 @@ export default function MissionItem(props: Props) {
         </div>
 
         {/* right side */}
-        <div className="flex flex-col">
-          <p>{`$${props.mission.reward}`}</p>
-          <p>{`${props.mission.distance}NM`}</p>
+        <div className="flex py-4">
+          {/* reward */}
+          <div className="flex flex-col space-y-2">
+            <div className="">
+              <p>{`$${props.mission.reward}`}</p>
+            </div>
+
+            {/* distance */}
+            <div className="flex">
+              <p>{`${props.mission.distance}NM`}</p>
+            </div>
+          </div>
         </div>
       </div>
     </>

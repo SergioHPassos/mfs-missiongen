@@ -62,7 +62,7 @@ export default function Header() {
 
       {/* links */}
       <div className={isDropped ? 'p-4' : 'hidden'}>
-        <Link href="" passHref={true}>
+        <Link href="/" passHref={true}>
           <p
             className="py-[0.35rem] text-lg font-medium"
             onClick={toggleIsDropped}

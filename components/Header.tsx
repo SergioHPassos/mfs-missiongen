@@ -1,5 +1,8 @@
-import { useState, useEffect, useRef } from 'react'
+import { useState, useEffect, useRef, useContext } from 'react'
 import Link from 'next/link'
+
+// context
+import { PilotContext } from '../context/PilotContext'
 
 // dependencies
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
@@ -9,6 +12,8 @@ import { faBars } from '@fortawesome/free-solid-svg-icons'
 import { Pilot } from '../interfaces/UtilityInterfaces'
 
 export default function Header() {
+  const { state } = useContext(PilotContext)
+
   const [isDropped, setIsDropped] = useState<boolean>(false)
   const dropdown = useRef<HTMLDivElement>(null)
 
@@ -55,9 +60,9 @@ export default function Header() {
         </div>
 
         {/* account balance */}
-        {/* <div className="pr-3">
-          <p>{`Account Balance: $${12000}`}</p>
-        </div> */}
+        <div className="pr-3">
+          <p>{`Account Balance: $${state.pilot ? state.pilot.money : 0}`}</p>
+        </div>
       </div>
 
       {/* links */}

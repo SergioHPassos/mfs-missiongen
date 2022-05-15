@@ -1,5 +1,8 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useContext } from 'react'
 import type { InferGetStaticPropsType, NextPage } from 'next'
+
+// context
+import { PilotContext } from '../context/PilotContext'
 
 // components
 import Profile from '../components/Profile'
@@ -8,6 +11,12 @@ import Profile from '../components/Profile'
 import type { Pilot } from '../interfaces/UtilityInterfaces'
 
 const pilot = ({ pilots }: InferGetStaticPropsType<typeof getStaticProps>) => {
+  const { state } = useContext(PilotContext)
+
+  useEffect(() => {
+    state.setPilot(pilots[0])
+  }, [])
+
   return (
     <div className="">
       <Profile pilots={pilots} />

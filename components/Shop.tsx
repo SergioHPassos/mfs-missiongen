@@ -5,11 +5,6 @@ import ShopList from './ShopList'
 export default function Shop(props: Props) {
   const [totalShoppingCartCost, setTotalShoppingCartCost] = useState<number>(0)
 
-  const buyPlane = async () => {
-    // check pilot account balance
-    // update pilot account balance
-  }
-
   return (
     <>
       {/* title */}

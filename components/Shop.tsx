@@ -36,7 +36,7 @@ export default function Shop(props: Props) {
           })}
 
         {/* buy plane button */}
-        <div className="flex justify-center pt-8 text-center">
+        <div className="flex justify-center pt-8 pb-8 text-center">
           <button
             className={
               totalShoppingCartCost > 0

@@ -12,6 +12,7 @@ import { faBars } from '@fortawesome/free-solid-svg-icons'
 import { Pilot } from '../interfaces/UtilityInterfaces'
 
 export default function Header() {
+  // context manager
   const { state } = useContext(PilotContext)
 
   const [isDropped, setIsDropped] = useState<boolean>(false)
@@ -61,7 +62,9 @@ export default function Header() {
 
         {/* account balance */}
         <div className="pr-3">
-          <p>{`Account Balance: $${state.pilot ? state.pilot.money : 0}`}</p>
+          <p>{`Account Balance: $${
+            state.accountBalance ? state.accountBalance : 0
+          }`}</p>
         </div>
       </div>
 

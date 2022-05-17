@@ -1,6 +1,6 @@
 import '../styles/globals.css'
 import type { AppProps } from 'next/app'
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { Pilot, Mission } from '@prisma/client'
 
 // components
@@ -13,6 +13,13 @@ function MyApp({ Component, pageProps }: AppProps) {
   // pilot profile hook
   const [pilot, setPilot] = useState<Pilot | null>(null)
   const [mission, setMission] = useState<Mission | null>(null)
+  const [accountBalance, setAccountBalance] = useState<number | null>(0)
+
+  useEffect(() => {
+    if (pilot) {
+      setAccountBalance(pilot.money)
+    }
+  }, [pilot])
 
   return (
     <>
@@ -23,6 +30,8 @@ function MyApp({ Component, pageProps }: AppProps) {
             setPilot: setPilot,
             mission: mission,
             setMission: setMission,
+            accountBalance: accountBalance,
+            setAccountBalance: setAccountBalance,
           },
         }}
       >

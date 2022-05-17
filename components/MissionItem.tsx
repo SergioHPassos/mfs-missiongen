@@ -5,19 +5,33 @@ import React, { useState } from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faArrowRight } from '@fortawesome/free-solid-svg-icons'
 
+// components
+import Modal from './Modal'
+
 export default function MissionItem(props: Props) {
   const [bgColor, setBgColor] = useState<string>('bg-white')
+  const [isPopup, setIsPopup] = useState<boolean>(false)
 
   const toggleBgColor = () => {
     if (bgColor === 'bg-white') {
       setBgColor('bg-yellow-200')
+      setIsPopup(true)
     } else {
       setBgColor('bg-white')
+      setIsPopup(false)
     }
   }
 
   return (
     <>
+      {isPopup && (
+        <Modal
+          setIsPopup={setIsPopup}
+          isPopup={isPopup}
+          setBgColor={setBgColor}
+          mission={props.mission}
+        />
+      )}
       <div
         className={`flex justify-between px-3 ${bgColor}`}
         onClick={() => {
@@ -67,5 +81,5 @@ export default function MissionItem(props: Props) {
 }
 
 interface Props {
-  mission: Mission
+  mission?: Mission
 }

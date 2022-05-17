@@ -1,5 +1,8 @@
 import React from 'react'
 
+// dependencies
+import { v4 as uuidv4 } from 'uuid'
+
 // interfaces
 import type { Pilot } from '../interfaces/UtilityInterfaces'
 
@@ -15,7 +18,7 @@ export default function Profile(props: Props) {
           props.pilots.map((pilot) => {
             return (
               <>
-                <div className="flex flex-col space-y-4">
+                <div className="flex flex-col space-y-4" key={uuidv4()}>
                   <p>Pilot:</p>
                   <p>Age:</p>
                   <p>Money:</p>
@@ -25,12 +28,12 @@ export default function Profile(props: Props) {
                   <p>Missions Completed:</p>
                   <p>Planes Owned:</p>
                 </div>
-                <div className="flex flex-col space-y-4">
+                <div className="flex flex-col space-y-4" key={uuidv4()}>
                   <p>{`${pilot.firstName} ${pilot.middleName[0]}. ${pilot.lastName}`}</p>
                   <p>{`${pilot.age}`}</p>
                   <p>{`$${pilot.money}`}</p>
                   <p>{`${pilot.totalDistance}`}</p>
-                  <p>{`${pilot.totalCargo}`}</p>
+                  <p>{`${pilot.totalCargo}lb`}</p>
                   <p>{`${pilot.totalPassenger}`}</p>
                   <p>{`${pilot.missions.length}`}</p>
                   <p>{`${pilot.planes.length}`}</p>

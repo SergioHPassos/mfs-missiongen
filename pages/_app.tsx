@@ -1,7 +1,7 @@
 import '../styles/globals.css'
 import type { AppProps } from 'next/app'
 import { useState } from 'react'
-import { Pilot } from '@prisma/client'
+import { Pilot, Mission } from '@prisma/client'
 
 // components
 import Header from '../components/Header'
@@ -12,6 +12,7 @@ import { PilotContext } from '../context/PilotContext'
 function MyApp({ Component, pageProps }: AppProps) {
   // pilot profile hook
   const [pilot, setPilot] = useState<Pilot | null>(null)
+  const [mission, setMission] = useState<Mission | null>(null)
 
   return (
     <>
@@ -20,6 +21,8 @@ function MyApp({ Component, pageProps }: AppProps) {
           state: {
             pilot: pilot,
             setPilot: setPilot,
+            mission: mission,
+            setMission: setMission,
           },
         }}
       >

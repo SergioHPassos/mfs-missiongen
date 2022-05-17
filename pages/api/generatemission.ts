@@ -5,8 +5,8 @@ import { prisma } from '../../prisma/prismaInstance'
 const objectives: string[] = ['of cargo', 'passengers']
 const types: string[] = ['Deliver', 'Drop off']
 const objectiveQuantity: Quantity = {
-  deliver: new Array(50).fill(0).map((e) => (Math.random() * 150) | 0),
-  dropOff: new Array(50).fill(0).map((e) => Math.floor(Math.random() * 20) | 0),
+  deliver: new Array(50).fill(0).map((e) => (Math.random() * 150) | 1),
+  dropOff: new Array(50).fill(0).map((e) => Math.floor(Math.random() * 20) | 1),
 }
 
 export default async function handler(
@@ -15,7 +15,7 @@ export default async function handler(
 ) {
   if (req.method == 'GET') {
     const airports: Airport[] = await prisma.airport.findMany({
-      take: 100,
+      take: 80,
       select: {
         id: true,
         ident: true,

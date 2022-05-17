@@ -17,8 +17,8 @@ export default function activeflight() {
       <div className="">
         <ActiveFlight
           mission={state.mission}
-          updatePilot={() => {
-            const pilot = {
+          updatePilot={async () => {
+            const pilot: Pilot = {
               ...state.pilot,
               money: state.pilot.money + state.mission.reward,
               totalDistance: state.pilot.totalDistance + state.mission.distance,
@@ -31,12 +31,8 @@ export default function activeflight() {
                   ? state.pilot.totalPassenger + state.mission.objectiveQuantity
                   : state.pilot.totalPassenger,
             }
-
-            state.setPilot(pilot)
-
-            // state.setMission(null)
-
-            patchPilot(state.pilot)
+            const updatedPilot: Pilot = await patchPilot(pilot)
+            state.setPilot({ ...updatedPilot })
           }}
         />
       </div>
@@ -50,5 +46,8 @@ const patchPilot = async (pilot: Pilot) => {
     method: 'PATCH',
     body: JSON.stringify(pilot),
   })
-  console.log(res)
+  const data = await res.json()
+  const updatedPilot: Pilot = JSON.parse(data)
+  console.log(updatedPilot)
+  return updatedPilot
 }

@@ -7,28 +7,20 @@ import { v4 as uuidv4 } from 'uuid'
 import { Plane } from '../interfaces/UtilityInterfaces'
 
 export default function ShopList(props: Props) {
-  const [bgColor, setBgColor] = useState<string>('bg-white')
+  const [isActive, setIsActive] = useState<boolean>(false)
 
-  const toggleBgColor = () => {
-    if (bgColor === 'bg-white') {
-      setBgColor('bg-yellow-200')
-      props.setTotalShoppingCartCost(
-        props.totalShoppingCartCost + props.plane.cost
-      )
-    } else {
-      setBgColor('bg-white')
-      props.setTotalShoppingCartCost(
-        props.totalShoppingCartCost - props.plane.cost
-      )
-    }
+  const toggleIsActive = () => {
+    setIsActive(!isActive)
   }
 
   return (
     <div
-      className={`flex justify-between ${bgColor} py-6 px-3`}
+      className={`flex justify-between ${
+        isActive ? 'bg-yellow-200' : 'bg-white'
+      } py-6 px-3`}
       key={uuidv4()}
       onClick={() => {
-        toggleBgColor()
+        toggleIsActive()
       }}
     >
       {/* aircraft name */}
@@ -46,8 +38,8 @@ export default function ShopList(props: Props) {
 
 interface Props {
   plane: Plane
-  totalShoppingCartCost: number
-  setTotalShoppingCartCost: Function
+  planes: Plane[]
+  setPlanes: Function
 }
 
 const moneyString = (cost: number) => {

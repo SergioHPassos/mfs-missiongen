@@ -12,11 +12,13 @@ import { v4 as uuidv4 } from 'uuid'
 
 export default function Shop(props: Props) {
   const [totalShoppingCartCost, setTotalShoppingCartCost] = useState<number>(0)
+  const [planes, setPlanes] = useState<Plane[]>([])
 
   return (
     <>
       {/* title */}
       <Title title="Shop" key={uuidv4()} />
+      <p onClick={() => console.log(planes)}>asdasdasdasd</p>
 
       {/* list planes */}
       <div className="flex flex-col pt-14">
@@ -24,14 +26,12 @@ export default function Shop(props: Props) {
         {props.planes &&
           props.planes.map((plane) => {
             return (
-              <>
-                {/* aircraft name and cost */}
-                <ShopList
-                  plane={plane}
-                  totalShoppingCartCost={totalShoppingCartCost}
-                  setTotalShoppingCartCost={setTotalShoppingCartCost}
-                />
-              </>
+              <ShopList
+                plane={plane}
+                setPlanes={setPlanes}
+                planes={planes}
+                key={uuidv4()}
+              />
             )
           })}
 

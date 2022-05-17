@@ -34,7 +34,7 @@ export default function Profile(props: Props) {
                 <p>{`${pilot.firstName} ${pilot.middleName[0]}. ${pilot.lastName}`}</p>
                 <p>{`${pilot.age}`}</p>
                 <p>{`$${pilot.money}`}</p>
-                <p>{`${pilot.totalDistance}`}</p>
+                <p>{`${pilot.totalDistance.toString().substring(0, 5)}NM`}</p>
                 <p>{`${pilot.totalCargo}lb`}</p>
                 <p>{`${pilot.totalPassenger}`}</p>
                 <p>{`${pilot.missions.length}`}</p>

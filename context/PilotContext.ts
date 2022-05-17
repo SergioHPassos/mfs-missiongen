@@ -9,5 +9,7 @@ interface State {
     setPilot: Function
     mission: Mission
     setMission: Function
+    accountBalance: number
+    setAccountBalance: Function
   }
 }

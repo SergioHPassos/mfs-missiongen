@@ -19,14 +19,13 @@ export default async function (req: NextApiRequest, res: NextApiResponse) {
     })
     res.status(200).json(pilot)
   } else if (req.method === 'PATCH') {
-    const { id } = req.query
-    const { money, totalDistance, totalCargo, totalPassenger } = JSON.parse(
+    const { id, money, totalDistance, totalCargo, totalPassenger } = JSON.parse(
       req.body
     )
 
-    await prisma.pilot.update({
+    const pilot: Pilot = await prisma.pilot.update({
       where: {
-        id: id.toString(),
+        id: id,
       },
       data: {
         money: money,
@@ -36,6 +35,6 @@ export default async function (req: NextApiRequest, res: NextApiResponse) {
       },
     })
 
-    res.json({ status: 'success' })
+    res.json(JSON.stringify(pilot))
   }
 }

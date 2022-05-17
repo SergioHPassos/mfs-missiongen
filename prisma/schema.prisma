@@ -36,7 +36,7 @@ model Mission {
   distance          Int    @default(0)
   objective         String
   type              String
-  objectiveQuantity String
+  objectiveQuantity Int
   reward            Int    @default(0)
 
   Pilot   Pilot?  @relation(fields: [pilotId], references: [id])
@@ -52,7 +52,7 @@ model Pilot {
   middleName     String?
   age            Int     @default(0)
   money          Int     @default(0)
-  totalDistance  Int     @default(0)
+  totalDistance  Float     @default(0)
   totalCargo     Int     @default(0)
   totalPassenger Int     @default(0)
 

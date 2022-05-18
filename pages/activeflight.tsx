@@ -48,6 +48,5 @@ const patchPilot = async (pilot: Pilot) => {
   })
   const data = await res.json()
   const updatedPilot: Pilot = JSON.parse(data)
-  console.log(updatedPilot)
   return updatedPilot
 }

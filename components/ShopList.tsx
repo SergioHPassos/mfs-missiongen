@@ -16,11 +16,15 @@ export default function ShopList(props: Props) {
   return (
     <div
       className={`flex justify-between ${
-        isActive ? 'bg-yellow-200' : 'bg-white'
+        props.shoppingItemSetting && props.shoppingItemSetting.bgColor
       } py-6 px-3`}
       key={uuidv4()}
       onClick={() => {
-        toggleIsActive()
+        if (!props.shoppingItemSetting.isActive) {
+          props.dispatch(true, props.shoppingItemSetting)
+        } else {
+          props.dispatch(false, props.shoppingItemSetting)
+        }
       }}
     >
       {/* aircraft name */}
@@ -38,8 +42,14 @@ export default function ShopList(props: Props) {
 
 interface Props {
   plane: Plane
-  planes: Plane[]
-  setPlanes: Function
+  shoppingItemSetting: ShoppingItemSetting
+  dispatch: Function
+}
+
+interface ShoppingItemSetting {
+  aircraft: string
+  bgColor: 'bg-white' | 'bg-yellow-200'
+  isActive: boolean
 }
 
 const moneyString = (cost: number) => {

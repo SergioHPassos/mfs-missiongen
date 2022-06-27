@@ -1,4 +1,4 @@
-import { Pilot, Mission } from '@prisma/client'
+import { Pilot, Mission, Plane } from '@prisma/client'
 import { createContext } from 'react'
 
 export const PilotContext = createContext<State | null>(null)

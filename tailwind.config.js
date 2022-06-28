@@ -7,4 +7,8 @@ module.exports = {
     extend: {},
   },
   plugins: [require('daisyui')],
+  // daisyUI config (optional)
+  daisyui: {
+    base: false,
+  },
 }

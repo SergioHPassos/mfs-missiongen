@@ -9,6 +9,6 @@ module.exports = {
   plugins: [require('daisyui')],
   // daisyUI config (optional)
   daisyui: {
-    base: false,
+    base: true,
   },
 }

@@ -9,16 +9,16 @@ import { faArrowRight } from '@fortawesome/free-solid-svg-icons'
 import Modal from './Modal'
 
 export default function MissionItem(props: Props) {
-  const [bgColor, setBgColor] = useState<string>('bg-white')
+  const [bgColor, setBgColor] = useState<string>('bg-base-300')
   const [isPopup, setIsPopup] = useState<boolean>(false)
 
   const toggleBgColor = () => {
-    if (bgColor === 'bg-white') {
-      setBgColor('bg-yellow-200')
+    if (bgColor === 'bg-base-300') {
+      setBgColor('bg-base-100')
       setIsPopup(true)
     } else {
-      setBgColor('bg-white')
       setIsPopup(false)
+      setBgColor('bg-base-300')
     }
   }
 

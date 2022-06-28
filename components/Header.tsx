@@ -3,7 +3,7 @@ import Link from 'next/link'
 
 export default function Header() {
   return (
-    <div className="md:p-4">
+    <div className="md:pd-0 pb-4 md:p-4">
       <div className="navbar bg-base-300 shadow-xl md:rounded-lg">
         <div className="navbar-start">
           <div className="dropdown">

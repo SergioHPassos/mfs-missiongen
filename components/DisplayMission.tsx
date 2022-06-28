@@ -14,11 +14,15 @@ export default function DisplayMission(props: Props) {
 
   return (
     <>
-      <Title title="Missions" />
-      <div className="flex flex-col pt-14">
-        {props.missions.map((mission) => {
-          return <MissionItem mission={mission} key={uuidv4()} />
-        })}
+      <div className="md:p-4">
+        <div className="bg-base-300 shadow-xl md:rounded-lg">
+          <Title title="Missions" />
+          <div className="flex flex-col pt-14">
+            {props.missions.map((mission) => {
+              return <MissionItem mission={mission} key={uuidv4()} />
+            })}
+          </div>
+        </div>
       </div>
     </>
   )

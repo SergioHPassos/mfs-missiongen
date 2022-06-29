@@ -26,12 +26,12 @@ export default function Profile(props: Props) {
                     <tbody>
                       <tr>
                         <td>
-                          <button className="btn btn-info btn-sm">
+                          <button className="btn btn-info btn-xs text-[0.6rem] sm:text-[0.75rem] smd:text-base">
                             Pilot:
                           </button>
                         </td>
                         <td>
-                          <button className="btn btn-success btn-sm">
+                          <button className="btn btn-success btn-xs text-[0.6rem] sm:text-[0.75rem] smd:text-base">
                             {`${pilot.firstName} ${pilot.middleName[0]}. ${pilot.lastName}`}
                           </button>
                         </td>
@@ -39,10 +39,12 @@ export default function Profile(props: Props) {
 
                       <tr>
                         <td>
-                          <button className="btn btn-info btn-sm">Age:</button>
+                          <button className="btn btn-info btn-xs text-[0.6rem] sm:text-[0.75rem] smd:text-base">
+                            Age:
+                          </button>
                         </td>
                         <td>
-                          <button className="btn btn-success btn-sm">
+                          <button className="btn btn-success btn-xs text-[0.6rem] sm:text-[0.75rem] smd:text-base">
                             {`${pilot.age}`}
                           </button>
                         </td>
@@ -50,12 +52,12 @@ export default function Profile(props: Props) {
 
                       <tr>
                         <td>
-                          <button className="btn btn-info btn-sm">
+                          <button className="btn btn-info btn-xs text-[0.6rem] sm:text-[0.75rem] smd:text-base">
                             Money:
                           </button>
                         </td>
                         <td>
-                          <button className="btn btn-success btn-sm">
+                          <button className="btn btn-success btn-xs text-[0.6rem] sm:text-[0.75rem] smd:text-base">
                             {`$ ${pilot.money
                               .toString()
                               .replace(/\B(?=(\d{3})+(?!\d))/g, ',')}`}
@@ -65,12 +67,12 @@ export default function Profile(props: Props) {
 
                       <tr>
                         <td>
-                          <button className="btn btn-info btn-sm">
+                          <button className="btn btn-info btn-xs text-[0.6rem] sm:text-[0.75rem] smd:text-base">
                             Distance Traveled:
                           </button>
                         </td>
                         <td>
-                          <button className="btn btn-success btn-sm">
+                          <button className="btn btn-success btn-xs text-[0.6rem] sm:text-[0.75rem] smd:text-base">
                             {`${pilot.totalDistance
                               .toString()
                               .substring(0, 8)} NM`}
@@ -80,12 +82,12 @@ export default function Profile(props: Props) {
 
                       <tr>
                         <td>
-                          <button className="btn btn-info btn-sm">
+                          <button className="btn btn-info btn-xs text-[0.6rem] sm:text-[0.75rem] smd:text-base">
                             Total Cargo:
                           </button>
                         </td>
                         <td>
-                          <button className="btn btn-success btn-sm">
+                          <button className="btn btn-success btn-xs text-[0.6rem] sm:text-[0.75rem] smd:text-base">
                             {`${pilot.totalCargo
                               .toString()
                               .substring(0, 8)} lb`}
@@ -95,12 +97,12 @@ export default function Profile(props: Props) {
 
                       <tr>
                         <td>
-                          <button className="btn btn-info btn-sm">
+                          <button className="btn btn-info btn-xs text-[0.6rem] sm:text-[0.75rem] smd:text-base">
                             Total Passenger:
                           </button>
                         </td>
                         <td>
-                          <button className="btn btn-success btn-sm">
+                          <button className="btn btn-success btn-xs text-[0.6rem] sm:text-[0.75rem] smd:text-base">
                             {`${pilot.totalPassenger}`}
                           </button>
                         </td>
@@ -108,12 +110,12 @@ export default function Profile(props: Props) {
 
                       <tr>
                         <td>
-                          <button className="btn btn-info btn-sm">
+                          <button className="btn btn-info btn-xs text-[0.6rem] sm:text-[0.75rem] smd:text-base">
                             Missions Completed:
                           </button>
                         </td>
                         <td>
-                          <button className="btn btn-success btn-sm">
+                          <button className="btn btn-success btn-xs text-[0.6rem] sm:text-[0.75rem] smd:text-base">
                             {`${pilot.missions.length}`}
                           </button>
                         </td>
@@ -121,12 +123,12 @@ export default function Profile(props: Props) {
 
                       <tr>
                         <td>
-                          <button className="btn btn-info btn-sm">
+                          <button className="btn btn-info btn-xs text-[0.6rem] sm:text-[0.75rem] smd:text-base">
                             Planes Owned:
                           </button>
                         </td>
                         <td>
-                          <button className="btn btn-success btn-sm">
+                          <button className="btn btn-success btn-xs text-[0.6rem] sm:text-[0.75rem] smd:text-base">
                             {`${pilot.planes.length}`}
                           </button>
                         </td>

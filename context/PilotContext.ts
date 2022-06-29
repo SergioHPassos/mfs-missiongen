@@ -8,6 +8,8 @@ interface State {
     pilot: Pilot
     setPilot: Function
     mission: Mission
+    activeMission: Mission
+    setActiveMission: Function
     setMission: Function
     accountBalance: number
     setAccountBalance: Function

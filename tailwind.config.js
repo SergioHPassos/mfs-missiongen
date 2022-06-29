@@ -4,7 +4,18 @@ module.exports = {
     './components/**/*.{js,ts,jsx,tsx}',
   ],
   theme: {
-    extend: {},
+    extend: {
+      screens: {
+        xs: '320px',
+        sm: '375px',
+        smd: '425px',
+        md: '768px',
+        lg: '1024px',
+        xl: '1280px',
+        xl2: '1440px',
+        xl3: '2560px',
+      },
+    },
   },
   plugins: [require('daisyui')],
   // daisyUI config (optional)

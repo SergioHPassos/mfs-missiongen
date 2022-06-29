@@ -11,39 +11,134 @@ import Title from './Title'
 
 export default function Profile(props: Props) {
   return (
-    <>
-      <Title title="Pilot" />
-      {props.pilots &&
-        props.pilots.map((pilot) => {
-          return (
-            <div
-              className="flex items-center justify-between px-3 pt-14"
-              key={uuidv4()}
-            >
-              <div className="flex flex-col space-y-4">
-                <p>Pilot:</p>
-                <p>Age:</p>
-                <p>Money:</p>
-                <p>Distance Traveled:</p>
-                <p>Total Cargo:</p>
-                <p>Total Passenger:</p>
-                <p>Missions Completed:</p>
-                <p>Planes Owned:</p>
+    <div className="md:px-4">
+      <div className="bg-base-300 shadow-xl">
+        <Title title="Pilot Profile" />
+        {props.pilots &&
+          props.pilots.map((pilot) => {
+            return (
+              <div
+                className="flex items-center justify-center px-3 pb-6"
+                key={uuidv4()}
+              >
+                <div className="w-full">
+                  <table className="table-zebra table-compact table w-full shadow-lg">
+                    <tbody>
+                      <tr>
+                        <td>
+                          <button className="btn btn-info btn-sm">
+                            Pilot:
+                          </button>
+                        </td>
+                        <td>
+                          <button className="btn btn-success btn-sm">
+                            {`${pilot.firstName} ${pilot.middleName[0]}. ${pilot.lastName}`}
+                          </button>
+                        </td>
+                      </tr>
+
+                      <tr>
+                        <td>
+                          <button className="btn btn-info btn-sm">Age:</button>
+                        </td>
+                        <td>
+                          <button className="btn btn-success btn-sm">
+                            {`${pilot.age}`}
+                          </button>
+                        </td>
+                      </tr>
+
+                      <tr>
+                        <td>
+                          <button className="btn btn-info btn-sm">
+                            Money:
+                          </button>
+                        </td>
+                        <td>
+                          <button className="btn btn-success btn-sm">
+                            {`$ ${pilot.money
+                              .toString()
+                              .replace(/\B(?=(\d{3})+(?!\d))/g, ',')}`}
+                          </button>
+                        </td>
+                      </tr>
+
+                      <tr>
+                        <td>
+                          <button className="btn btn-info btn-sm">
+                            Distance Traveled:
+                          </button>
+                        </td>
+                        <td>
+                          <button className="btn btn-success btn-sm">
+                            {`${pilot.totalDistance
+                              .toString()
+                              .substring(0, 8)} NM`}
+                          </button>
+                        </td>
+                      </tr>
+
+                      <tr>
+                        <td>
+                          <button className="btn btn-info btn-sm">
+                            Total Cargo:
+                          </button>
+                        </td>
+                        <td>
+                          <button className="btn btn-success btn-sm">
+                            {`${pilot.totalCargo
+                              .toString()
+                              .substring(0, 8)} lb`}
+                          </button>
+                        </td>
+                      </tr>
+
+                      <tr>
+                        <td>
+                          <button className="btn btn-info btn-sm">
+                            Total Passenger:
+                          </button>
+                        </td>
+                        <td>
+                          <button className="btn btn-success btn-sm">
+                            {`${pilot.totalPassenger}`}
+                          </button>
+                        </td>
+                      </tr>
+
+                      <tr>
+                        <td>
+                          <button className="btn btn-info btn-sm">
+                            Missions Completed:
+                          </button>
+                        </td>
+                        <td>
+                          <button className="btn btn-success btn-sm">
+                            {`${pilot.missions.length}`}
+                          </button>
+                        </td>
+                      </tr>
+
+                      <tr>
+                        <td>
+                          <button className="btn btn-info btn-sm">
+                            Planes Owned:
+                          </button>
+                        </td>
+                        <td>
+                          <button className="btn btn-success btn-sm">
+                            {`${pilot.planes.length}`}
+                          </button>
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
               </div>
-              <div className="flex flex-col space-y-4">
-                <p>{`${pilot.firstName} ${pilot.middleName[0]}. ${pilot.lastName}`}</p>
-                <p>{`${pilot.age}`}</p>
-                <p>{`$${pilot.money}`}</p>
-                <p>{`${pilot.totalDistance.toString().substring(0, 5)}NM`}</p>
-                <p>{`${pilot.totalCargo}lb`}</p>
-                <p>{`${pilot.totalPassenger}`}</p>
-                <p>{`${pilot.missions.length}`}</p>
-                <p>{`${pilot.planes.length}`}</p>
-              </div>
-            </div>
-          )
-        })}
-    </>
+            )
+          })}
+      </div>
+    </div>
   )
 }
 

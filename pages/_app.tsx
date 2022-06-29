@@ -13,6 +13,7 @@ function MyApp({ Component, pageProps }: AppProps) {
   // pilot profile hook
   const [pilot, setPilot] = useState<Pilot | null>(null)
   const [mission, setMission] = useState<Mission | null>(null)
+  const [activeMission, setActiveMission] = useState<Mission | null>(null)
   const [accountBalance, setAccountBalance] = useState<number | null>(0)
 
   useEffect(() => {
@@ -30,6 +31,8 @@ function MyApp({ Component, pageProps }: AppProps) {
             setPilot: setPilot,
             mission: mission,
             setMission: setMission,
+            activeMission: activeMission,
+            setActiveMission: setActiveMission,
             accountBalance: accountBalance,
             setAccountBalance: setAccountBalance,
           },

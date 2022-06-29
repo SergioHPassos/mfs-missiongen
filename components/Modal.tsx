@@ -1,50 +1,105 @@
-import React, { useContext } from 'react'
-import Link from 'next/link'
-import type { Mission } from '@prisma/client'
+import { Mission } from '@prisma/client'
+import React, { Fragment, useContext } from 'react'
 
-// context provider
+//
+import { Dialog, Transition } from '@headlessui/react'
+
+// context
 import { PilotContext } from '../context/PilotContext'
 
 export default function Modal(props: Props) {
   const { state } = useContext(PilotContext)
 
-  const rejectHandler = () => {
-    props.setIsPopup(!props.isPopup)
-    props.setBgColor('bg-white')
-  }
-
   return (
     <>
-      <div className="fixed inset-0 left-1/2 top-1/2 z-50 h-[13%] w-[50%] -translate-x-1/2 -translate-y-1/2 rounded bg-slate-300">
-        <div className="flex justify-center pt-3">
-          <p>Select Flight?</p>
-        </div>
-        <div className="flex justify-between px-2 py-2">
-          <Link href="/activeflight">
-            <button
-              className="h-6 w-20 rounded bg-emerald-400"
-              onClick={() => {
-                state.setMission(props.mission)
-              }}
-            >
-              Accept
-            </button>
-          </Link>
-          <button
-            className="h-6 w-20 rounded bg-rose-400"
-            onClick={() => rejectHandler()}
+      <Transition appear show={props?.isOpen} as={Fragment}>
+        <Dialog
+          as="div"
+          className="relative z-10"
+          onClose={() => props.closeModal()}
+        >
+          <Transition.Child
+            as={Fragment}
+            enter="ease-out duration-300"
+            enterFrom="opacity-0"
+            enterTo="opacity-100"
+            leave="ease-in duration-200"
+            leaveFrom="opacity-100"
+            leaveTo="opacity-0"
           >
-            Reject
-          </button>
-        </div>
-      </div>
+            <div className="fixed inset-0 bg-black bg-opacity-25" />
+          </Transition.Child>
+
+          <div className="fixed inset-0 overflow-y-auto">
+            <div className="flex min-h-full items-center justify-center p-4 text-center">
+              <Transition.Child
+                as={Fragment}
+                enter="ease-out duration-300"
+                enterFrom="opacity-0 scale-95"
+                enterTo="opacity-100 scale-100"
+                leave="ease-in duration-200"
+                leaveFrom="opacity-100 scale-100"
+                leaveTo="opacity-0 scale-95"
+              >
+                <Dialog.Panel className="w-full max-w-md transform overflow-hidden rounded-2xl bg-base-300 p-6 text-left align-middle shadow-xl transition-all">
+                  <Dialog.Title
+                    as="h3"
+                    className="text-lg font-medium leading-6"
+                  >
+                    {state.mission?.title}
+                  </Dialog.Title>
+                  <div className="mt-2 flex justify-between">
+                    <p className="text-sm ">
+                      <button className="btn btn-primary  btn-sm">
+                        {state.mission?.departingAirport}
+                      </button>{' '}
+                      /{' '}
+                      <button className="btn btn-secondary btn-sm">
+                        {state.mission?.arrivingAirport}
+                      </button>
+                    </p>
+                    <p className="text-sm">
+                      <button className="btn btn-warning btn-sm">
+                        ${' '}
+                        {state.mission?.reward &&
+                          state.mission?.reward
+                            .toString()
+                            .replace(/\B(?=(\d{3})+(?!\d))/g, ',')}
+                      </button>
+                    </p>
+                  </div>
+
+                  <div className="mt-4 flex justify-center space-x-[46%]">
+                    <button
+                      type="button"
+                      className="inline-flex justify-center rounded-md border border-transparent bg-base-100 px-4 py-2 text-sm font-medium hover:bg-base-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2"
+                      onClick={() => {
+                        state.setActiveMission({ ...state.mission })
+                        props.closeModal()
+                      }}
+                    >
+                      Accept
+                    </button>
+                    <button
+                      type="button"
+                      className="inline-flex justify-center rounded-md border border-transparent bg-base-100 px-4 py-2 text-sm font-medium hover:bg-base-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2"
+                      onClick={() => props.closeModal()}
+                    >
+                      Decline
+                    </button>
+                  </div>
+                </Dialog.Panel>
+              </Transition.Child>
+            </div>
+          </div>
+        </Dialog>
+      </Transition>
     </>
   )
 }
 
 interface Props {
-  setIsPopup?: Function
-  isPopup?: boolean
-  setBgColor?: Function
   mission?: Mission
+  closeModal?: Function
+  isOpen: boolean
 }

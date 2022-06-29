@@ -122,7 +122,14 @@ async function GenerateMission(
     const _reward: number = Math.floor(
       Math.random() * (_arriving.distance || 1) * 1000
     )
+
+    // set title
+    const _title: string = `${_type} ${
+      _objective === 'of cargo' ? _quantity + 'lb' : _quantity
+    } ${_objective} to ${_arriving.ident}`
+
     const mission: Mission = {
+      title: _title,
       departingAirport: _departing.ident,
       arrivingAirport: _arriving.ident,
       distance: _arriving.distance,
@@ -132,6 +139,7 @@ async function GenerateMission(
       reward: _reward,
       // airports: [_departing, _arriving],
     }
+
     missions.push(mission)
   }
 
@@ -147,6 +155,7 @@ interface Airport {
 }
 
 interface Mission {
+  title?: string
   departingAirport?: string
   arrivingAirport?: string
   distance?: number

@@ -77,7 +77,7 @@ export default function DisplayMission(props: Props) {
                               >
                                 <span>
                                   <button className="btn btn-primary btn-xs">
-                                    {state.mission?.departingAirport}
+                                    {mission?.departingAirport}
                                   </button>{' '}
                                   /{' '}
                                   <button className="btn btn-secondary btn-xs">
@@ -87,15 +87,13 @@ export default function DisplayMission(props: Props) {
                                 <span aria-hidden="true">&middot;</span>{' '}
                                 <span>
                                   <button className="btn btn-xs bg-base-300">
-                                    {state.mission?.distance &&
-                                      state.mission?.distance}{' '}
-                                    NM
+                                    {mission?.distance && mission?.distance} NM
                                   </button>{' '}
                                   /{' '}
                                   <button className="btn btn-warning btn-xs">
                                     ${' '}
-                                    {state.mission?.reward &&
-                                      state.mission?.reward
+                                    {mission?.reward &&
+                                      mission?.reward
                                         .toString()
                                         .replace(/\B(?=(\d{3})+(?!\d))/g, ',')}
                                   </button>

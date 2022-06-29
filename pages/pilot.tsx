@@ -7,9 +7,6 @@ import { PilotContext } from '../context/PilotContext'
 // components
 import Profile from '../components/Profile'
 
-// interfaces
-import type { Pilot } from '../interfaces/UtilityInterfaces'
-
 const pilot = ({ pilots }: InferGetStaticPropsType<typeof getStaticProps>) => {
   const { state } = useContext(PilotContext)
 

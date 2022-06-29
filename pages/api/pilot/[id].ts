@@ -19,9 +19,7 @@ export default async function (req: NextApiRequest, res: NextApiResponse) {
     })
     res.status(200).json(pilot)
   } else if (req.method === 'PATCH') {
-    const { id, money, totalDistance, totalCargo, totalPassenger } = JSON.parse(
-      req.body
-    )
+    const { id, money, totalDistance, totalCargo, totalPassenger } = req.body
 
     const pilot: Pilot = await prisma.pilot.update({
       where: {
@@ -35,6 +33,6 @@ export default async function (req: NextApiRequest, res: NextApiResponse) {
       },
     })
 
-    res.json(JSON.stringify(pilot))
+    res.json(pilot)
   }
 }

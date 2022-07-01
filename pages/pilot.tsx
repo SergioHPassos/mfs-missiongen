@@ -16,7 +16,7 @@ const pilot = ({ pilots }: InferGetStaticPropsType<typeof getStaticProps>) => {
 
   return (
     <div className="">
-      <Profile pilots={pilots} />
+      <Profile pilot={pilots[0]} />
     </div>
   )
 }

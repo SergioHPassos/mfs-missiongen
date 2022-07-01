@@ -15,7 +15,7 @@ export default async function handler(
 ) {
   if (req.method == 'GET') {
     const airports: Airport[] = await prisma.airport.findMany({
-      take: 80,
+      take: 100,
       select: {
         id: true,
         ident: true,
@@ -24,7 +24,7 @@ export default async function handler(
       },
     })
 
-    const missions: Mission[] = await GenerateMission(airports, 10, 30)
+    const missions: Mission[] = await GenerateMission(airports, 5, 30)
 
     res.status(200).json(missions)
   }

@@ -86,7 +86,7 @@ export default function DisplayMission(props: Props) {
                                 </span>{' '}
                                 <span aria-hidden="true">&middot;</span>{' '}
                                 <span>
-                                  <button className="btn btn-xs bg-base-300">
+                                  <button className="btn btn-xs bg-base-content text-white">
                                     {mission?.distance && mission?.distance} NM
                                   </button>{' '}
                                   /{' '}

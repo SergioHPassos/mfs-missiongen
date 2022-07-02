@@ -52,7 +52,7 @@ export default function DisplayMission(props: Props) {
                           ? 'ring-2 ring-white ring-opacity-60 ring-offset-2 ring-offset-sky-300'
                           : ''
                       }
-                  ${checked ? 'bg-accent-focus bg-opacity-75' : 'bg-base-100'}
+                  ${checked ? 'bg-base-200 bg-opacity-75' : 'bg-base-100'}
                     relative flex cursor-pointer rounded-lg px-5 py-4 shadow focus:outline-none`
                     }
                   >
@@ -64,7 +64,7 @@ export default function DisplayMission(props: Props) {
                               <RadioGroup.Label
                                 as="p"
                                 className={`font-medium  ${
-                                  checked ? 'text-white' : ''
+                                  checked ? 'text-base-content' : ''
                                 }`}
                               >
                                 {mission.title}
@@ -86,7 +86,7 @@ export default function DisplayMission(props: Props) {
                                 </span>{' '}
                                 <span aria-hidden="true">&middot;</span>{' '}
                                 <span>
-                                  <button className="btn btn-xs bg-base-300">
+                                  <button className="btn btn-xs text-white">
                                     {mission?.distance && mission?.distance} NM
                                   </button>{' '}
                                   /{' '}

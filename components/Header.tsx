@@ -51,7 +51,7 @@ export default function Header() {
               <li>
                 <Link href="/shop" passHref={true}>
                   <p className="py-[0.35rem] text-lg font-medium">
-                    <a href="">Shop</a>
+                    <a href="">Planes</a>
                   </p>
                 </Link>
               </li>

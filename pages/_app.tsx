@@ -2,6 +2,7 @@ import '../styles/globals.css'
 import type { AppProps } from 'next/app'
 import { useState, useEffect } from 'react'
 import { Pilot, Mission } from '@prisma/client'
+import { ThemeProvider } from 'next-themes'
 
 // components
 import Header from '../components/Header'
@@ -23,25 +24,27 @@ function MyApp({ Component, pageProps }: AppProps) {
   }, [pilot])
 
   return (
-    <>
-      <PilotContext.Provider
-        value={{
-          state: {
-            pilot: pilot,
-            setPilot: setPilot,
-            mission: mission,
-            setMission: setMission,
-            activeMission: activeMission,
-            setActiveMission: setActiveMission,
-            accountBalance: accountBalance,
-            setAccountBalance: setAccountBalance,
-          },
-        }}
-      >
-        <Header />
-        <Component {...pageProps} />
-      </PilotContext.Provider>
-    </>
+    <div>
+      <ThemeProvider>
+        <PilotContext.Provider
+          value={{
+            state: {
+              pilot: pilot,
+              setPilot: setPilot,
+              mission: mission,
+              setMission: setMission,
+              activeMission: activeMission,
+              setActiveMission: setActiveMission,
+              accountBalance: accountBalance,
+              setAccountBalance: setAccountBalance,
+            },
+          }}
+        >
+          <Header />
+          <Component {...pageProps} />
+        </PilotContext.Provider>
+      </ThemeProvider>
+    </div>
   )
 }
 

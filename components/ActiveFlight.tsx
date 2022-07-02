@@ -12,6 +12,7 @@ import { PilotContext } from '../context/PilotContext'
 import { v4 as uuidv4 } from 'uuid'
 import { RadioGroup } from '@headlessui/react'
 import { Dialog, Transition } from '@headlessui/react'
+import mission from '../pages/mission'
 
 export default function ActiveFlight(props: Props) {
   const { state } = useContext(PilotContext)
@@ -72,6 +73,36 @@ export default function ActiveFlight(props: Props) {
                       type="button"
                       className="inline-flex justify-center rounded-md border border-transparent bg-base-100 px-4 py-2 text-sm font-medium hover:bg-base-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2"
                       onClick={() => {
+                        fetch(
+                          'http://localhost:3000/api/pilot/cl347rys00013ysutsmhnpzlr',
+                          {
+                            method: 'PATCH',
+                            body: JSON.stringify({
+                              id: state.pilot.id,
+                              money:
+                                state.pilot.money + state.activeMission.reward,
+                              totalDistance:
+                                state.pilot.totalDistance +
+                                state.activeMission.distance,
+                              totalCargo:
+                                state.activeMission.type === 'Deliver'
+                                  ? state.pilot.totalCargo +
+                                    state.activeMission.objectiveQuantity
+                                  : state.pilot.totalCargo,
+                              totalPassenger:
+                                state.activeMission.type === 'Drop off'
+                                  ? state.pilot.totalPassenger +
+                                    state.activeMission.objectiveQuantity
+                                  : state.pilot.totalPassenger,
+                              mission: state.activeMission,
+                            }),
+                            headers: {
+                              'Content-type': 'application/json; charset=UTF-8',
+                            },
+                          }
+                        )
+                          .then((response) => response.json())
+                          .then((json) => state.setPilot({ ...json }))
                         state.setActiveMission(null)
                         closeModal()
                       }}
@@ -93,7 +124,7 @@ export default function ActiveFlight(props: Props) {
         </Dialog>
       </Transition>
       <div className="md:px-4">
-        <div className="bg-base-300 shadow-xl">
+        <div className="rounded-lg bg-base-300 shadow-xl">
           {/* title */}
           <Title title="Active Mission" />
 
@@ -119,7 +150,7 @@ export default function ActiveFlight(props: Props) {
                               ? 'ring-2 ring-white ring-opacity-60 ring-offset-2 ring-offset-sky-300'
                               : ''
                           }
-                  ${checked ? 'bg-primary bg-opacity-75' : 'bg-base-100'}
+                  ${checked ? 'bg-base-200 bg-opacity-75' : 'bg-base-100'}
                     relative flex cursor-pointer rounded-lg px-5 py-4 shadow focus:outline-none`
                         }
                       >
@@ -131,10 +162,10 @@ export default function ActiveFlight(props: Props) {
                                   <RadioGroup.Label
                                     as="p"
                                     className={`font-medium  ${
-                                      checked ? 'text-white' : ''
+                                      checked ? 'text-gray-600' : ''
                                     }`}
                                   >
-                                    {mission?.title}
+                                    {mission.title}
                                   </RadioGroup.Label>
                                   <RadioGroup.Description
                                     as="span"
@@ -144,7 +175,7 @@ export default function ActiveFlight(props: Props) {
                                   >
                                     <span>
                                       <button className="btn btn-primary btn-xs">
-                                        {state.mission?.departingAirport}
+                                        {mission?.departingAirport}
                                       </button>{' '}
                                       /{' '}
                                       <button className="btn btn-secondary btn-xs">
@@ -153,16 +184,15 @@ export default function ActiveFlight(props: Props) {
                                     </span>{' '}
                                     <span aria-hidden="true">&middot;</span>{' '}
                                     <span>
-                                      <button className="btn btn-xs bg-base-300">
-                                        {state.mission?.distance &&
-                                          state.mission?.distance}{' '}
+                                      <button className="btn btn-xs text-gray-600 hover:text-base-100 dark:bg-base-300">
+                                        {mission?.distance && mission?.distance}{' '}
                                         NM
                                       </button>{' '}
                                       /{' '}
                                       <button className="btn btn-warning btn-xs">
                                         ${' '}
-                                        {state.mission?.reward &&
-                                          state.mission?.reward
+                                        {mission?.reward &&
+                                          mission?.reward
                                             .toString()
                                             .replace(
                                               /\B(?=(\d{3})+(?!\d))/g,

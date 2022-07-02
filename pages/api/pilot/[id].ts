@@ -1,6 +1,6 @@
 import type { NextApiRequest, NextApiResponse } from 'next'
 import { prisma } from '../../../prisma/prismaInstance'
-import type { Mission, Pilot } from '@prisma/client'
+import type { Pilot } from '@prisma/client'
 // import type { Pilot } from '../../../interfaces/UtilityInterfaces'
 
 export default async function (req: NextApiRequest, res: NextApiResponse) {
@@ -19,8 +19,7 @@ export default async function (req: NextApiRequest, res: NextApiResponse) {
     })
     res.status(200).json(pilot)
   } else if (req.method === 'PATCH') {
-    const { id, money, totalDistance, totalCargo, totalPassenger, mission } =
-      req.body
+    const { id, money, totalDistance, totalCargo, totalPassenger } = req.body
 
     const pilot: Pilot = await prisma.pilot.update({
       where: {
@@ -34,6 +33,6 @@ export default async function (req: NextApiRequest, res: NextApiResponse) {
       },
     })
 
-    res.status(200).json(pilot)
+    res.json(pilot)
   }
 }

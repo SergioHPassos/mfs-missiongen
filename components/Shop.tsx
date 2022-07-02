@@ -57,41 +57,68 @@ export default function Shop(props: Props) {
 
   return (
     <>
-      <div className="md:px-4">
-        <div className="rounded-lg bg-base-300 shadow-xl">
-          {/* title */}
-          <Title title="Planes" key={uuidv4()} />
+      {/* title */}
+      <Title title="Shop" key={uuidv4()} />
 
-          {/* card */}
-          <div className="flex flex-col items-start justify-center space-y-4 px-4 md:flex-row md:flex-wrap md:space-y-2 md:space-x-2">
-            {props.planes.map((plane) => {
-              return (
-                <>
-                  <div className="card w-full bg-base-100 shadow-xl md:w-1/3">
-                    <figure>
-                      <img
-                        src="https://www.daher.com/app/uploads/2020/08/FlightSim_Hero-Asset_Still-1-1920x1080.jpg"
-                        alt="Shoes"
-                      />
-                    </figure>
-                    <div className="card-body">
-                      <div className="flex items-center justify-between">
-                        <p className="text-xl font-semibold md:text-[0.75rem]">
-                          {plane.aircraft}
-                        </p>
-                        <button
-                          type="button"
-                          className="rounded-md bg-black bg-opacity-20 px-4 py-2 text-sm font-medium text-white hover:bg-opacity-30 focus:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-opacity-75"
-                        >
-                          Details
-                        </button>
-                      </div>
-                    </div>
-                  </div>
-                </>
-              )
-            })}
-          </div>
+      {/* list planes */}
+      <div className="flex flex-col pt-14">
+        {/* render list planes */}
+        {props.planes &&
+          props.planes.map((plane) => {
+            return (
+              <ShopList
+                plane={plane}
+                shoppingItemSetting={
+                  shoppingItemSettings &&
+                  shoppingItemSettings.find(
+                    (e) => e.aircraft === plane.aircraft
+                  )
+                }
+                dispatch={dispatch}
+                key={uuidv4()}
+              />
+            )
+          })}
+
+        {/* buy plane button */}
+        <div className="flex justify-center pt-8 pb-8 text-center">
+          <button
+            className={
+              shoppingItemSettings &&
+              shoppingItemSettings.find((e) => e.isActive === true)
+                ? 'text-md h-10 w-36 rounded-sm bg-yellow-500 text-yellow-100'
+                : 'h-10 w-24 rounded-sm bg-yellow-500 text-xl text-yellow-100'
+            }
+            onClick={async () => {
+              if (
+                totalPrice > 0 &&
+                (state.pilot ? state.pilot.money : 0) >= totalPrice
+              ) {
+                const pilot: Pilot = {
+                  ...state.pilot,
+                  money:
+                    state.pilot.money -
+                    (shoppingItemSettings
+                      ? shoppingItemSettings.find((e) => e.isActive === true)
+                          .cost
+                      : 0),
+                  totalDistance: state.pilot.totalDistance,
+                  totalCargo: state.pilot.totalCargo,
+                  totalPassenger: state.pilot.totalPassenger,
+                }
+
+                const updatedPilot: Pilot = await patchPilot(pilot)
+                state.setPilot({ ...updatedPilot })
+              }
+            }}
+          >
+            {shoppingItemSettings &&
+            shoppingItemSettings.find((e) => e.isActive === true)
+              ? `Buy ($${
+                  shoppingItemSettings.find((e) => e.isActive === true).cost
+                })`
+              : 'Buy'}
+          </button>
         </div>
       </div>
     </>

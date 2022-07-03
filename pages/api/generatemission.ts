@@ -1,12 +1,13 @@
 // Next.js API route support: https://nextjs.org/docs/api-routes/introduction
+import { request } from 'http'
 import type { NextApiRequest, NextApiResponse } from 'next'
 import { prisma } from '../../prisma/prismaInstance'
 
 const objectives: string[] = ['of cargo', 'passengers']
 const types: string[] = ['Deliver', 'Drop off']
 const objectiveQuantity: Quantity = {
-  deliver: new Array(50).fill(0).map((e) => (Math.random() * 150) | 1),
-  dropOff: new Array(50).fill(0).map((e) => Math.floor(Math.random() * 20) | 1),
+  deliver: new Array(50).fill(0).map((e) => Math.random() * 150),
+  dropOff: new Array(50).fill(0).map((e) => Math.ceil(Math.random() * 20)),
 }
 
 export default async function handler(
@@ -27,6 +28,45 @@ export default async function handler(
     const missions: Mission[] = await GenerateMission(airports, 5, 30)
 
     res.status(200).json(missions)
+  } else if (req.method === 'POST') {
+    const { minDistance, maxDistance } = JSON.parse(req.body)
+
+    const airportCount = await prisma.airport.count()
+    const skip = Math.floor(Math.random() * airportCount)
+
+    const airports: Airport[] = await prisma.airport.findMany({
+      take: 100,
+      skip: skip,
+      select: {
+        id: true,
+        ident: true,
+        latitude_deg: true,
+        longitude_deg: true,
+      },
+    })
+
+    let missions: Mission[] = await GenerateMission(
+      airports,
+      minDistance,
+      maxDistance
+    )
+
+    let k: number = 5
+    while (k > 0) {
+      if (missions.length < 2) {
+        k--
+        missions = await GenerateMission(airports, minDistance, maxDistance)
+      } else {
+        break
+      }
+    }
+
+    let newMissions: Mission[] = []
+    for (var i = 0; i < 12; i++) {
+      newMissions.push(missions[Math.floor(Math.random() * missions.length)])
+    }
+
+    res.status(200).json(newMissions)
   }
 }
 

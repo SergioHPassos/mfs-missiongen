@@ -13,11 +13,17 @@ import { PilotContext } from '../context/PilotContext'
 import Title from './Title'
 import Modal from './Modal'
 import PopoverInfo from './PopoverInfo'
+import MissionItem from './MissionItem'
 
 export default function DisplayMission(props: Props) {
   const [selected, setSelected] = useState<Mission>(null)
   const [modalMissionData, setModalMissionData] = useState<Mission>(null)
   const { state } = useContext(PilotContext)
+
+  const [_minDistance, set_MinDistance] = useState<number>(20)
+  const [_maxDistance, set_MaxDistance] = useState<number>(30)
+
+  const [missions, setMissions] = useState<Mission[]>(null)
 
   let [isOpen, setIsOpen] = useState(false)
 
@@ -27,6 +33,21 @@ export default function DisplayMission(props: Props) {
 
   function openModal() {
     setIsOpen(true)
+  }
+
+  const fetchFilteredMissions = async () => {
+    await fetch(`http://localhost:3000/api/generatemission/`, {
+      method: 'POST',
+      body: JSON.stringify({
+        minDistance: _minDistance,
+        maxDistance: _maxDistance,
+      }),
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        setMissions([...data])
+        console.log(data)
+      })
   }
 
   return (
@@ -41,114 +62,41 @@ export default function DisplayMission(props: Props) {
           <div className="flex items-center">
             <div className="flex w-full items-center justify-between">
               <Title title="Missions" />
-              <PopoverInfo buttonText="filter" pr="pr-4" />
+              <div className="flex flex-row items-center space-x-4 pr-4">
+                <PopoverInfo
+                  buttonText="filter"
+                  minDistance={_minDistance}
+                  setMinDistance={set_MinDistance}
+                  maxDistance={_maxDistance}
+                  setMaxDistance={set_MaxDistance}
+                />
+                <button
+                  className="btn btn-primary"
+                  onClick={fetchFilteredMissions}
+                >
+                  search
+                </button>
+              </div>
             </div>
           </div>
           <RadioGroup value={selected} onChange={setSelected} className="pb-4">
             <RadioGroup.Label className="sr-only">Server size</RadioGroup.Label>
             <div className="space-y-2 px-4">
-              {props.missions.map((mission) => {
-                return (
-                  <RadioGroup.Option
-                    key={uuidv4()}
-                    value={mission}
-                    className={({ active, checked }) =>
-                      `${
-                        active
-                          ? 'ring-2 ring-white ring-opacity-60 ring-offset-2 ring-offset-sky-300'
-                          : ''
-                      }
-                  ${checked ? 'bg-accent-focus bg-opacity-75' : 'bg-base-100'}
-                    relative flex cursor-pointer rounded-lg px-5 py-4 shadow focus:outline-none`
-                    }
-                  >
-                    {({ active, checked }) => (
-                      <>
-                        <div className="flex w-full items-center justify-between">
-                          <div className="flex items-center">
-                            <div className="text-sm">
-                              <RadioGroup.Label
-                                as="p"
-                                className={`font-medium  ${
-                                  checked ? 'text-white' : ''
-                                }`}
-                              >
-                                {mission.title}
-                              </RadioGroup.Label>
-                              <RadioGroup.Description
-                                as="span"
-                                className={`inline ${
-                                  checked ? 'text-sky-100' : 'text-gray-500'
-                                }`}
-                              >
-                                <span>
-                                  <button className="btn btn-primary btn-xs">
-                                    {mission?.departingAirport}
-                                  </button>{' '}
-                                  /{' '}
-                                  <button className="btn btn-secondary btn-xs">
-                                    {mission.arrivingAirport}
-                                  </button>
-                                </span>{' '}
-                                <span aria-hidden="true">&middot;</span>{' '}
-                                <span>
-                                  <button className="btn btn-xs bg-base-content text-white">
-                                    {mission?.distance && mission?.distance} NM
-                                  </button>{' '}
-                                  /{' '}
-                                  <button className="btn btn-warning btn-xs">
-                                    ${' '}
-                                    {mission?.reward &&
-                                      mission?.reward
-                                        .toString()
-                                        .replace(/\B(?=(\d{3})+(?!\d))/g, ',')}
-                                  </button>
-                                </span>
-                              </RadioGroup.Description>
-                            </div>
-                          </div>
-                          {checked && (
-                            <div
-                              className="shrink-0 text-white"
-                              onClick={() => state.setMission({ ...mission })}
-                            >
-                              <CheckIcon
-                                openModal={openModal}
-                                mission={mission}
-                                setModalMissionData={setModalMissionData}
-                              />
-                            </div>
-                          )}
-                        </div>
-                      </>
-                    )}
-                  </RadioGroup.Option>
-                )
-              })}
+              {missions &&
+                missions.map((mission) => {
+                  return (
+                    <MissionItem
+                      mission={mission}
+                      openModal={openModal}
+                      setModalMissionData={setModalMissionData}
+                    />
+                  )
+                })}
             </div>
           </RadioGroup>
         </div>
       </div>
     </>
-  )
-}
-
-function CheckIcon(props: {
-  mission?: Mission
-  openModal?: Function
-  setModalMissionData?: Function
-}) {
-  return (
-    <button
-      type="button"
-      onClick={() => {
-        props.setModalMissionData({ ...props.mission })
-        props.openModal()
-      }}
-      className="rounded-md bg-black bg-opacity-20 px-4 py-2 text-sm font-medium text-white hover:bg-opacity-30 focus:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-opacity-75"
-    >
-      Details
-    </button>
   )
 }
 

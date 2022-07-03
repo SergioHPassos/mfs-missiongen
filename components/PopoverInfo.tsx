@@ -3,22 +3,16 @@ import { Fragment } from 'react'
 
 const solutions = [
   {
-    name: 'Insights',
+    name: 'minimum distance',
     description: 'Measure actions your users take',
     href: '##',
     icon: IconOne,
   },
   {
-    name: 'Automations',
+    name: 'maximum distance',
     description: 'Create your own targeted content',
     href: '##',
     icon: IconTwo,
-  },
-  {
-    name: 'Reports',
-    description: 'Keep track of your growth',
-    href: '##',
-    icon: IconThree,
   },
 ]
 
@@ -57,17 +51,25 @@ export default function PopoverInfo(props: Props) {
                           <item.icon aria-hidden="true" />
                         </div>
                         <div className="ml-4">
-                          <p className="text-sm font-medium text-gray-900">
-                            {item.name}
-                          </p>
-                          <p className="text-sm text-gray-500">
-                            {item.description}
-                          </p>
+                          <input
+                            type="number"
+                            placeholder={`${item.name}`}
+                            className="input input-bordered input-accent w-full max-w-xs"
+                            onChange={(e) =>
+                              item.name === 'minimum distance' &&
+                              props?.setMinDistance
+                                ? props?.setMinDistance(e.target.value)
+                                : item.name === 'maximum distance' &&
+                                  props?.setMaxDistance
+                                ? props?.setMaxDistance(e.target.value)
+                                : null
+                            }
+                          />
                         </div>
                       </a>
                     ))}
                   </div>
-                  <div className="bg-base-100 p-4">
+                  {/* <div className="bg-base-100 p-4">
                     <a
                       href="##"
                       className="flow-root rounded-md bg-base-100 px-2 py-2 transition duration-150 ease-in-out hover:bg-base-300 focus:outline-none focus-visible:ring focus-visible:ring-orange-500 focus-visible:ring-opacity-50"
@@ -81,7 +83,7 @@ export default function PopoverInfo(props: Props) {
                         Start integrating products and tools
                       </span>
                     </a>
-                  </div>
+                  </div> */}
                 </div>
               </Popover.Panel>
             </Transition>
@@ -94,6 +96,10 @@ export default function PopoverInfo(props: Props) {
 
 interface Props {
   buttonText?: string
+  minDistance?: number
+  setMinDistance?: Function
+  maxDistance?: number
+  setMaxDistance?: Function
   pr?: string
 }
 

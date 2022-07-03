@@ -1,7 +1,7 @@
 import type { Mission } from '@prisma/client'
 import React, { useState, useContext } from 'react'
-import Link from 'next/link'
 import { RadioGroup } from '@headlessui/react'
+import { Popover } from '@headlessui/react'
 
 // dependencies
 import { v4 as uuidv4 } from 'uuid'
@@ -12,6 +12,7 @@ import { PilotContext } from '../context/PilotContext'
 // components
 import Title from './Title'
 import Modal from './Modal'
+import PopoverInfo from './PopoverInfo'
 
 export default function DisplayMission(props: Props) {
   const [selected, setSelected] = useState<Mission>(null)
@@ -37,7 +38,12 @@ export default function DisplayMission(props: Props) {
       />
       <div className="md:px-4">
         <div className="bg-base-300 shadow-xl md:rounded-lg">
-          <Title title="Missions" />
+          <div className="flex items-center">
+            <div className="flex w-full items-center justify-between">
+              <Title title="Missions" />
+              <PopoverInfo buttonText="filter" pr="pr-4" />
+            </div>
+          </div>
           <RadioGroup value={selected} onChange={setSelected} className="pb-4">
             <RadioGroup.Label className="sr-only">Server size</RadioGroup.Label>
             <div className="space-y-2 px-4">

@@ -13,6 +13,7 @@ import { v4 as uuidv4 } from 'uuid'
 import { RadioGroup } from '@headlessui/react'
 import { Dialog, Transition } from '@headlessui/react'
 import mission from '../pages/mission'
+import Tag from './Tag'
 
 export default function ActiveFlight(props: Props) {
   const { state } = useContext(PilotContext)
@@ -71,7 +72,7 @@ export default function ActiveFlight(props: Props) {
                   <div className="mt-4 flex justify-center space-x-[46%]">
                     <button
                       type="button"
-                      className="inline-flex justify-center rounded-md border border-transparent bg-base-100 px-4 py-2 text-sm font-medium hover:bg-base-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2"
+                      className="inline-flex justify-center rounded-md border border-transparent bg-base-300 px-4 py-2 text-sm font-medium hover:bg-base-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2"
                       onClick={() => {
                         fetch(
                           'http://localhost:3000/api/pilot/cl347rys00013ysutsmhnpzlr',
@@ -111,7 +112,7 @@ export default function ActiveFlight(props: Props) {
                     </button>
                     <button
                       type="button"
-                      className="inline-flex justify-center rounded-md border border-transparent bg-base-100 px-4 py-2 text-sm font-medium hover:bg-base-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2"
+                      className="inline-flex justify-center rounded-md border border-transparent bg-base-300 px-4 py-2 text-sm font-medium hover:bg-base-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2"
                       onClick={() => closeModal()}
                     >
                       No
@@ -150,7 +151,7 @@ export default function ActiveFlight(props: Props) {
                               ? 'ring-2 ring-white ring-opacity-60 ring-offset-2 ring-offset-sky-300'
                               : ''
                           }
-                  ${checked ? 'bg-base-200 bg-opacity-75' : 'bg-base-100'}
+                  ${checked ? 'bg-primary bg-opacity-75' : 'bg-base-100'}
                     relative flex cursor-pointer rounded-lg px-5 py-4 shadow focus:outline-none`
                         }
                       >
@@ -162,7 +163,7 @@ export default function ActiveFlight(props: Props) {
                                   <RadioGroup.Label
                                     as="p"
                                     className={`font-medium  ${
-                                      checked ? 'text-gray-600' : ''
+                                      checked ? 'text-white' : ''
                                     }`}
                                   >
                                     {mission.title}
@@ -174,31 +175,38 @@ export default function ActiveFlight(props: Props) {
                                     }`}
                                   >
                                     <span>
-                                      <button className="btn btn-primary btn-xs">
-                                        {mission?.departingAirport}
-                                      </button>{' '}
+                                      <Tag
+                                        text={mission?.departingAirport}
+                                        type="departingAirport"
+                                      />{' '}
                                       /{' '}
-                                      <button className="btn btn-secondary btn-xs">
-                                        {mission.arrivingAirport}
-                                      </button>
+                                      <Tag
+                                        text={mission?.arrivingAirport}
+                                        type="arrivingAirport"
+                                      />
                                     </span>{' '}
                                     <span aria-hidden="true">&middot;</span>{' '}
                                     <span>
-                                      <button className="btn btn-xs text-gray-600 hover:text-base-100 dark:bg-base-300">
-                                        {mission?.distance && mission?.distance}{' '}
-                                        NM
-                                      </button>{' '}
+                                      <Tag
+                                        text={`${
+                                          mission?.distance &&
+                                          props?.mission?.distance
+                                        } NM`}
+                                        type="distance"
+                                      />{' '}
                                       /{' '}
-                                      <button className="btn btn-warning btn-xs">
-                                        ${' '}
-                                        {mission?.reward &&
-                                          mission?.reward
+                                      <Tag
+                                        text={`$ ${
+                                          props?.mission?.reward &&
+                                          props?.mission?.reward
                                             .toString()
                                             .replace(
                                               /\B(?=(\d{3})+(?!\d))/g,
                                               ','
-                                            )}
-                                      </button>
+                                            )
+                                        }`}
+                                        type="reward"
+                                      />
                                     </span>
                                   </RadioGroup.Description>
                                 </div>

@@ -6,6 +6,7 @@ import { Dialog, Transition } from '@headlessui/react'
 
 // context
 import { PilotContext } from '../context/PilotContext'
+import Tag from './Tag'
 
 export default function Modal(props: Props) {
   const { state } = useContext(PilotContext)
@@ -41,7 +42,7 @@ export default function Modal(props: Props) {
                 leaveFrom="opacity-100 scale-100"
                 leaveTo="opacity-0 scale-95"
               >
-                <Dialog.Panel className="w-full max-w-md transform overflow-hidden rounded-2xl bg-base-300 p-6 text-left align-middle shadow-xl transition-all">
+                <Dialog.Panel className="w-full max-w-md transform overflow-hidden rounded-2xl bg-base-100 p-6 text-left align-middle shadow-xl transition-all">
                   <Dialog.Title
                     as="h3"
                     className="text-lg font-medium leading-6"
@@ -50,29 +51,33 @@ export default function Modal(props: Props) {
                   </Dialog.Title>
                   <div className="mt-2 flex justify-between">
                     <p className="text-sm ">
-                      <button className="btn btn-primary  btn-sm">
-                        {state.mission?.departingAirport}
-                      </button>{' '}
+                      <Tag
+                        text={props?.mission?.departingAirport}
+                        type="departingAirport"
+                      />{' '}
                       /{' '}
-                      <button className="btn btn-secondary btn-sm">
-                        {state.mission?.arrivingAirport}
-                      </button>
+                      <Tag
+                        text={props?.mission?.arrivingAirport}
+                        type="arrivingAirport"
+                      />
                     </p>
                     <p className="text-sm">
-                      <button className="btn btn-warning btn-sm">
-                        ${' '}
-                        {state.mission?.reward &&
-                          state.mission?.reward
+                      <Tag
+                        text={`$ ${
+                          props?.mission?.reward &&
+                          props?.mission?.reward
                             .toString()
-                            .replace(/\B(?=(\d{3})+(?!\d))/g, ',')}
-                      </button>
+                            .replace(/\B(?=(\d{3})+(?!\d))/g, ',')
+                        }`}
+                        type="reward"
+                      />
                     </p>
                   </div>
 
                   <div className="mt-4 flex justify-center space-x-[46%]">
                     <button
                       type="button"
-                      className="inline-flex justify-center rounded-md border border-transparent bg-base-100 px-4 py-2 text-sm font-medium hover:bg-base-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2"
+                      className="inline-flex justify-center rounded-md border border-transparent bg-base-300 px-4 py-2 text-sm font-medium hover:bg-base-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2"
                       onClick={() => {
                         state.setActiveMission({ ...state.mission })
                         props.closeModal()
@@ -82,7 +87,7 @@ export default function Modal(props: Props) {
                     </button>
                     <button
                       type="button"
-                      className="inline-flex justify-center rounded-md border border-transparent bg-base-100 px-4 py-2 text-sm font-medium hover:bg-base-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2"
+                      className="inline-flex justify-center rounded-md border border-transparent bg-base-300 px-4 py-2 text-sm font-medium hover:bg-base-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2"
                       onClick={() => props.closeModal()}
                     >
                       Decline

@@ -1,10 +1,13 @@
 import { useState, useEffect, useRef, useContext } from 'react'
 import Link from 'next/link'
 import { useTheme } from 'next-themes'
+import LoginButton from './LoginButton'
+import { useSession } from 'next-auth/react'
 
 export default function Header() {
   const { theme, setTheme } = useTheme()
   const [isDark, setIsDark] = useState<boolean>(false)
+  const { data: session } = useSession()
 
   return (
     <div className="md:pd-0 pb-4 md:p-4">
@@ -59,6 +62,11 @@ export default function Header() {
                   </p>
                 </Link>
               </li>
+              <li>
+                <p className="py-[0.35rem] text-lg font-medium">
+                  <LoginButton />
+                </p>
+              </li>
             </ul>
           </div>
         </div>
@@ -70,6 +78,15 @@ export default function Header() {
           </Link>
         </div>
         <div className="navbar-end">
+          {session && (
+            <div>
+              <img
+                className="mask mask-circle scale-[0.35]"
+                src={session.user.image}
+                alt="user profile"
+              />
+            </div>
+          )}
           <label className="swap-rotate swap scale-50">
             <input type="checkbox" />
             {/* sun icon */}

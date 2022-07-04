@@ -2,7 +2,14 @@ import React from 'react'
 
 export default function Tag(props: Props) {
   return (
-    <button className={`btn btn-xs ${getColorType(props?.type)} text-black`}>
+    <button
+      className={`btn btn-xs hover:bg-white ${getColorType(
+        props?.type
+      )} text-black`}
+      onClick={() => {
+        navigator.clipboard.writeText(props?.text)
+      }}
+    >
       {props?.text}
     </button>
   )

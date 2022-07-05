@@ -1,5 +1,6 @@
 import { Mission } from '@prisma/client'
 import React, { Fragment, useContext } from 'react'
+import Link from 'next/link'
 
 //
 import { Dialog, Transition } from '@headlessui/react'
@@ -75,16 +76,18 @@ export default function Modal(props: Props) {
                   </div>
 
                   <div className="mt-4 flex justify-center space-x-[46%]">
-                    <button
-                      type="button"
-                      className="inline-flex justify-center rounded-md border border-transparent bg-base-300 px-4 py-2 text-sm font-medium hover:bg-base-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2"
-                      onClick={() => {
-                        state.setActiveMission({ ...state.mission })
-                        props.closeModal()
-                      }}
-                    >
-                      Accept
-                    </button>
+                    <Link href="/activeflight" passHref={true}>
+                      <button
+                        type="button"
+                        className="inline-flex justify-center rounded-md border border-transparent bg-base-300 px-4 py-2 text-sm font-medium hover:bg-base-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2"
+                        onClick={() => {
+                          state.setActiveMission({ ...state.mission })
+                          props.closeModal()
+                        }}
+                      >
+                        Accept
+                      </button>
+                    </Link>
                     <button
                       type="button"
                       className="inline-flex justify-center rounded-md border border-transparent bg-base-300 px-4 py-2 text-sm font-medium hover:bg-base-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2"
